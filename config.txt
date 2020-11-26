@@ -1,0 +1,17 @@
+
+[$!{question.frontendQuestionId}]${question.title}/${question.title}
+
+
+template
+
+${question.content}
+//${question.frontendQuestionId}-${question.titleSlug}
+//$!velocityTool.date()
+
+${question.code}
+
+ class test{
+    public static void main(String[] args) {
+
+    }
+}
