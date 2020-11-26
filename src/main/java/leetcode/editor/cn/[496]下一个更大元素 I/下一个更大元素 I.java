@@ -17,6 +17,9 @@
 // 示例 2: 
 //
 // 输入: nums1 = [2,4], nums2 = [1,2,3,4].
+
+//2,3   1,3,2,4
+//4,4
 //输出: [3,-1]
 //解释:
 //    对于 num1 中的数字 2 ，第二个数组中的下一个较大数字是 3 。
@@ -37,14 +40,92 @@
 //496-next-greater-element-i
 //2020-11-26 23:46:50
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] result = new int[nums1.length];
 
-        
+        Stack<Integer> target = new Stack<>();
+        for (int i : nums1) {
+            target.push(i);
+        }
 
 
-        return null;
+        int index = 0;
+        List<Integer> ls = new ArrayList<>();
+        for (int j : nums2) {
+
+            if (target.size()!=0&&j == target.peek()) {
+                ls.add(target.pop());
+            }
+
+
+            for (Integer l : ls) {
+                if (l != 0 && l < j) {
+                    result[ls.indexOf(l)] = l;
+                    ls.set(ls.indexOf(l), 0);
+                    break;
+                }
+            }
+        }
+
+        for (Integer l : ls) {
+            if (l != 0) {
+                result[ls.indexOf(l)] = -1;
+            }
+        }
+
+        return result;
+//        if (temp != -1 && nums1[i] == j) {
+//            temp = -1;
+//        }
+//
+//        if (temp == -1) {
+//            if (j > nums1[i]) {
+//                temp = j;
+//            }
+//        }
+
+    }
+}
+
+/**
+ * 暴力法。
+ */
+class Solution2 {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+
+        int[] result = new int[nums1.length];
+
+        for (int i = 0; i < nums1.length; i++) {
+            int temp = 0;
+            for (int j : nums2) {
+
+                if (temp != -1 && nums1[i] == j) {
+                    temp = -1;
+                }
+
+                if (temp == -1) {
+                    if (j > nums1[i]) {
+                        temp = j;
+                    }
+                }
+
+            }
+            result[i] = temp;
+
+        }
+
+        return result;
+        //
+
+//
+//        return null;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -52,6 +133,10 @@ class Solution {
 
 class test {
     public static void main(String[] args) {
-
+        int[] ints = new Solution2().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
+        System.out.println(Arrays.toString(ints));
+//        [4,1,2] [1,3,4,2]
+        int[] ints2 = new Solution().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
+        System.out.println(Arrays.toString(ints2));
     }
 }
