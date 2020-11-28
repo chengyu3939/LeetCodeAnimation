@@ -7,7 +7,16 @@
 //
 // 示例 1: 
 //
-// 输入: nums1 = [4,1,2], nums2 = [1,3,4,2].
+// 输入: nums1 = [4,1,2],
+//      nums2 = [1,3,4,2].
+//  入站排序
+//  ||  ||
+//  |2|  ||
+//  |4|  |2|
+//  |3|  |4|
+//  |1|  |1|
+
+
 //输出: [-1,3,-1]
 //解释:
 //    对于num1中的数字4，你无法在第二个数组中找到下一个更大的数字，因此输出 -1。
@@ -40,59 +49,48 @@
 //496-next-greater-element-i
 //2020-11-26 23:46:50
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import leetcode.editor.cn.base.DownSingleStack;
+
+import java.util.*;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> hashMap = new HashMap<>();
+
+        Stack<Integer> stack = new DownSingleStack() {
+            @Override
+            public void call(Integer pop, Integer obj) {
+                hashMap.put(pop, obj);
+            }
+
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        };
+
+        for (int i : nums2) {
+            stack.push(i);
+        }
+
+
         int[] result = new int[nums1.length];
 
-        Stack<Integer> target = new Stack<>();
-        for (int i : nums1) {
-            target.push(i);
-        }
+        for (int i = 0; i < nums1.length; i++) {
 
+            if (hashMap.get(nums1[i]) != null) {
+                result[i] = hashMap.get(nums1[i]);
 
-        int index = 0;
-        List<Integer> ls = new ArrayList<>();
-        for (int j : nums2) {
-
-            if (target.size()!=0&&j == target.peek()) {
-                ls.add(target.pop());
-            }
-
-
-            for (Integer l : ls) {
-                if (l != 0 && l < j) {
-                    result[ls.indexOf(l)] = l;
-                    ls.set(ls.indexOf(l), 0);
-                    break;
-                }
-            }
-        }
-
-        for (Integer l : ls) {
-            if (l != 0) {
-                result[ls.indexOf(l)] = -1;
+            } else {
+                result[i] = -1;
             }
         }
 
         return result;
-//        if (temp != -1 && nums1[i] == j) {
-//            temp = -1;
-//        }
-//
-//        if (temp == -1) {
-//            if (j > nums1[i]) {
-//                temp = j;
-//            }
-//        }
-
     }
 }
+
 
 /**
  * 暴力法。
@@ -138,5 +136,21 @@ class test {
 //        [4,1,2] [1,3,4,2]
         int[] ints2 = new Solution().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
         System.out.println(Arrays.toString(ints2));
+
+
+        //测试单调栈
+//        Stack<Integer> stack = new singleStack() {
+//            @Override
+//            public int compare(Integer o1, Integer o2) {
+//                return o2 - o1;
+//            }
+//        };
+//
+//        stack.push(1);
+//        stack.push(3);
+//        stack.push(4);
+//        stack.push(2);
+//        System.out.println(stack);
+
     }
 }
