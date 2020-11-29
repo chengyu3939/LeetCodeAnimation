@@ -23,6 +23,21 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
 
         Map<Integer, Integer> result = new HashMap<>();
+
+        for (int i = 0; i < T.length; i++) {
+            if (stack.empty()) {
+                stack.push(T[i]);
+            } else if (stack.peek() < i) {
+                Integer pop = stack.pop();
+                int count = result.get(pop) == null ? 0 : result.get(pop);
+                result.put(pop, count + 1);
+                stack.push(i);
+            }
+
+        }
+
+
+
         Arrays.stream(T).forEach(i -> {
 
             if (stack.empty()) {
