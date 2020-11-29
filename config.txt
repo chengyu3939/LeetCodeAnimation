@@ -1,10 +1,9 @@
 
-a$!{question.frontendQuestionId}/${question.title}/${question.title}
-
+a$!{question.frontendQuestionId}/$!velocityTool.camelCaseName(${question.title})/$!velocityTool.camelCaseName(${question.title})
 
 template
 
-package leetcode.editor.cn.a$!{question.frontendQuestionId}.${question.title};
+package leetcode.editor.cn.a$!{question.frontendQuestionId}.$!velocityTool.camelCaseName(${question.title});
 ${question.content}
 //${question.frontendQuestionId}-${question.titleSlug}
 //$!velocityTool.date()
