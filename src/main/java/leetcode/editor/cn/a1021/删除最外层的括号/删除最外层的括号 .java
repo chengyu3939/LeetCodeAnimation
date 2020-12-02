@@ -58,34 +58,19 @@ class Solution {
     public String removeOuterParentheses(String S) {
         StringBuilder sb = new StringBuilder();
 
-        Stack<Character> stack = new Stack<>();
-
-
         StringBuilder tempSb = new StringBuilder();
+        int count = 0;
         for (char c : S.toCharArray()) {
+            tempSb.append(c);
             if ('(' == c) {
-                stack.push(c);
+                count++;
             } else {
-                if (stack.size() > 2) {
-                    tempSb.insert(0, stack.pop()).append(c);
-                } else if (stack.size() == 2) {
-                    String s = tempSb.toString();
-                    tempSb.insert(0, stack.pop()).append(c);
-                    sb.append(tempSb);
-                    tempSb.setLength(0);
-                } else if (stack.size() == 1) {
-                    stack.pop();
-                }
-
-
-//                Character pop = stack.pop();
-                //此处
-
-//                if (stack.size() != 0) {
-//                    sb.append(pop).append(c);
-//
-//
-//                }
+                count--;
+            }
+            count = '(' == c ? count + 1 : count - 1;
+            if (count == 0) {
+                sb.append(tempSb.subSequence(1, tempSb.length() - 1));
+                tempSb.setLength(0);
             }
         }
 
@@ -96,8 +81,9 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 
 
- class Main_1021{
+class Main_1021 {
     public static void main(String[] args) {
 
+        System.out.println(new Solution().removeOuterParentheses("((()())(()()))"));
     }
 }

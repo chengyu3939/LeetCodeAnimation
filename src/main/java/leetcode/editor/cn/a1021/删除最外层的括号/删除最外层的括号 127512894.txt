@@ -1,0 +1,45 @@
+class Solution {
+    public String removeOuterParentheses(String S) {
+        StringBuilder sb = new StringBuilder();
+
+        Stack<Character> stack = new Stack<>();
+
+
+        StringBuilder tempSb = new StringBuilder();
+        for (char c : S.toCharArray()) {
+            if ('(' == c) {
+                stack.push(c);
+            } else {
+                if (stack.size() > 2) {
+                    tempSb.insert(0, stack.pop()).append(c);
+                } else if (stack.size() == 2) {
+                    String s = tempSb.toString();
+                    tempSb.insert(0, stack.pop()).append(c);
+                    sb.append(tempSb);
+                    tempSb.setLength(0);
+                } else if (stack.size() == 1) {
+                    stack.pop();
+                }
+
+
+//                Character pop = stack.pop();
+                //此处
+
+//                if (stack.size() != 0) {
+//                    sb.append(pop).append(c);
+//
+//
+//                }
+            }
+        }
+
+
+        return sb.toString();
+    }
+}
+
+//total_testcases:59
+//total_correct:34
+//input_formatted:"((()())(()()))"
+//expected_output:"(()())(()())"
+//code_output:"((()))((()))"
