@@ -1,0 +1,38 @@
+class Solution {
+    public int minOperations(String[] logs) {
+
+        Stack<Integer> result = new Stack<>();
+
+        for (String log : logs) {
+
+            Integer mapping = mapping(log);
+
+            if (result.empty()) {
+                result.push(mapping);
+            } else {
+                result.push(Math.addExact(mapping, result.pop()));
+            }
+
+        }
+
+        return result.pop();
+
+    }
+
+    public Integer mapping(String ops) {
+        if ("../".equalsIgnoreCase(ops)) {
+            return -1;
+        } else if ("./".equals(ops)) {
+            return 0;
+        } else {
+            return 1;
+        }
+
+    }
+}
+
+//total_testcases:99
+//total_correct:64
+//input_formatted:["d1/","../","../","../"]
+//expected_output:0
+//code_output:-2

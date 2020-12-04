@@ -131,12 +131,23 @@ class Solution2 {
 
 class test {
     public static void main(String[] args) {
-        int[] ints = new Solution2().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
-        System.out.println(Arrays.toString(ints));
-//        [4,1,2] [1,3,4,2]
-        int[] ints2 = new Solution().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
-        System.out.println(Arrays.toString(ints2));
+//        int[] ints = new Solution2().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
+//        System.out.println(Arrays.toString(ints));
+////        [4,1,2] [1,3,4,2]
+//        int[] ints2 = new Solution().nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2});
+//        System.out.println(Arrays.toString(ints2));
 
+StringBuilder stringBuilder=new StringBuilder();
+stringBuilder.append('a').append('b').append('b');
+char temp=stringBuilder.charAt(stringBuilder.length()-1);
+char temp2=stringBuilder.charAt(stringBuilder.length()-2);
+
+if (temp==temp2){
+    stringBuilder.deleteCharAt(stringBuilder.length()-2);
+    stringBuilder.insert(stringBuilder.length()-2,temp2);
+}
+
+        System.out.println(stringBuilder.toString());
 
         //测试单调栈
 //        Stack<Integer> stack = new singleStack() {

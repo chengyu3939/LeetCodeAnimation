@@ -64,6 +64,7 @@ package leetcode.editor.cn.a1441.用栈操作构建数组;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
@@ -75,10 +76,26 @@ class Solution {
             ls.add(i);
         }
 
+        List<String> strings = new ArrayList<>();
+        int index = 0;
+        for (int i : target) {
+            while (true) {
+                strings.add("Push");
+                if (i != ls.get(index)) {
+                    strings.add("Pop");
+                } else {
+                    index++;
+                    break;
+                }
+                index++;
+            }
+
+
+        }
 
         //开始操作
 
-        return null;
+        return strings;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -87,5 +104,6 @@ class Solution {
 class Main_1441 {
     public static void main(String[] args) {
 
+        System.out.println(new Solution().buildArray(new int[]{1, 3}, 3));
     }
 }
