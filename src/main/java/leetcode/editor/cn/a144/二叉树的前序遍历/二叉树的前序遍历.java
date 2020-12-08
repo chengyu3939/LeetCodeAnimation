@@ -117,6 +117,15 @@ class Solution {
         }
     }
 
+    /**
+     *
+     * 前序遍历：迭代方式
+     *  取出顶点，将其值取出，分别将其左右点放入到占中。依次遍历。直到所有节点均被取出。
+     *
+     *
+     * @param node
+     * @return
+     */
     public List<Integer> iterator(TreeNode node) {
         List<Integer> ls = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -137,11 +146,6 @@ class Solution {
                 stack.push(left);
 
             }
-
-
-            //left
-            //right
-
 
         }
         return ls;
