@@ -58,6 +58,7 @@ package leetcode.editor.cn.a94.二叉树的中序遍历;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 // * Definition for a binary tree node.
@@ -82,15 +83,11 @@ class TreeNode {
 
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-
-        List<Integer> result = new ArrayList<>();
-
-        List<Integer> list = leftIter(root, result);
-        return list;
+        return iterator(root);
     }
 
     public List<Integer> leftIter(TreeNode node, List<Integer> list) {
-        if (node==null){
+        if (node == null) {
             return list;
         }
         if (node.left != null) {
@@ -103,12 +100,61 @@ class Solution {
         }
         return list;
     }
+
+    public List<Integer> iterator(TreeNode node) {
+        List<Integer> ls = new ArrayList<>();
+        if (node == null) {
+            return ls;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = node;
+        while (!stack.empty() || cur != null) {
+            if (cur.left != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                ls.add(cur.val);
+                if (cur.right != null) {
+                    cur = cur.right;
+                } else {
+                    cur = null;
+                    //循环遍历。直到找到包含有节点的段
+                    while (!stack.empty()) {
+                        TreeNode pop = stack.pop();
+                        ls.add(pop.val);
+                        if (pop.right != null) {
+                            cur = pop.right;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return ls;
+    }
+
+    /**
+     * jiedian2
+     *
+     * @param node
+     * @return
+     */
+    public List<Integer> iterator2(TreeNode node) {
+
+
+        return null;
+
+
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 class Main_Nine4 {
     public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(1, new TreeNode(2, new TreeNode(3), new TreeNode(5)), new TreeNode(3));
 
+        List<Integer> iterator = new Solution().iterator(treeNode);
+        System.out.println(iterator);
     }
 }
