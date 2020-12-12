@@ -36,6 +36,8 @@ package leetcode.editor.cn.a173.二叉搜索树迭代器;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -78,17 +80,12 @@ class BSTIterator {
 
     Stack<TreeNode> h = new Stack<>();
 
-    public BSTIterator(TreeNode root) {
+    public BSTIterator(TreeNode node) {
 
-        cur = root;
-        //遍历找到最小的节点
-        while (true) {
-            if (cur.left != null) {
-                h.push(cur);
-                cur = cur.left;
-            } else {
-                break;
-            }
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> result = new ArrayList<>();
+        if (node != null) {
+            stack.push(node);
         }
 
 
