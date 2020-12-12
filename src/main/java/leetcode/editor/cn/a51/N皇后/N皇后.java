@@ -59,15 +59,11 @@ class QueueCondition {
         if (xdy.contains(this.xdy.size() - cur)) {
             return false;
         }
-
         if (xay.contains(this.xdy.size() + cur)) {
             return false;
         }
-
         return !list.contains(cur);
-
     }
-
 
     public QueueCondition copyAndAddCur(Integer cur) {
         QueueCondition queueCondition = new QueueCondition();
@@ -107,24 +103,6 @@ class Solution {
 
         }
 
-
-//
-//        for (QueueCondition integers : result) {
-//            List<String> list = new ArrayList<>();
-//            StringBuilder stringBuilder = new StringBuilder();
-//            for (Integer integer : integers.list) {
-//                stringBuilder.setLength(0);
-//                for (int i = 0; i < n; i++) {
-//                    if (i == integer) {
-//                        stringBuilder.append("Q");
-//                    } else {
-//                        stringBuilder.append(".");
-//                    }
-//                }
-//                list.add(stringBuilder.toString());
-//            }
-//            results.add(list);
-//        }
         return results;
     }
 
@@ -151,7 +129,7 @@ class Solution {
 
 class Main_51 {
     public static void main(String[] args) {
-        List<List<String>> lists = new Solution().solveNQueens(80);
+        List<List<String>> lists = new Solution().solveNQueens(16);
 
         for (List<String> list : lists) {
             System.out.println();
